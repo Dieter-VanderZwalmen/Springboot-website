@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='collector.overview')"></head>
+
+
+<body>
+<header th:replace="fragments/header :: header(current='VerzamelaarOverview')"></header>
+
+<main>
+
+    <h2 th:text="#{Remove.collector}"></h2>
+    <div th:if="${error}!=null" class="alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+    <div th:if="${error}==null">
+        <form action="#" th:action="@{/collectors/remove/{id}(id=${collector.id})}" th:object="${collector}" method="post">
+            <p th:text="#{Are.you.sure}"></p>
+            <input type="submit" th:value="#{remove.collector}" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+
+</main>
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

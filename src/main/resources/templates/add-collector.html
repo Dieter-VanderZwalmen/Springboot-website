@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title=#{title.club.add})"></head>
+<link rel="icon" href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+
+<body>
+<header th:replace="fragments/header :: header(current='addVerzamelaar')"></header>
+
+<main class="container">
+
+    <h2 th:text="#{title.club.add}"></h2>
+    <form method="POST" action="/collectors/add" th:object="${collector}">
+        <p class="mb-3">
+            <label for="name" class="col-form-label"><a th:text="#{Name}"></a></label>
+            <input type="text" th:field="*{name}" id="name" th:placeholder="#{Name}" class="form-control col-sm-5">
+            <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
+        </p>
+        <p class="mb-3">
+            <label for="firstname" class="col-form-label"><a th:text="#{Firstname}"></a></label>
+            <input type="text" th:field="*{firstname}" id="firstname" th:placeholder="#{Firstname}" class="form-control col-sm-5">
+            <span th:each="error:${#fields.errors('firstname')}" th:text="#{${error}}" class="text-danger"></span>
+        </p>
+        <p class="mb-3">
+            <label for="regio" class="col-form-label"><a th:text="#{Region}"></a></label>
+            <input type="text" th:field="*{regio}" id="regio" th:placeholder="#{Region}" class="form-control col-sm-5">
+            <span th:each="error:${#fields.errors('regio')}" th:text="#{${error}}" class="text-danger"></span>
+        </p>
+        <p class="mb-3">
+            <label for="age" class="col-form-label"><a th:text="#{Age}"></a></label>
+            <input type="number"  th:field="*{age}" id="age"  class="form-control col-sm-5">
+            <span th:each="error:${#fields.errors('age')}" th:text="#{${error}}" class="text-danger"></span>
+        </p>
+        <p>
+            <input  type="submit"  th:value="#{add.collector}" class="btn btn-secondary">
+        </p>
+    </form>
+
+
+
+</main>
+<footer th:replace="fragments/footer"></footer>
+
+</body>
+</html>

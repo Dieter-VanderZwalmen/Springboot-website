@@ -1,0 +1,19 @@
+.localnav, .localdropul {
+    background-color: #A39470;
+    color: white;
+}
+.localdropul li a {
+    color: white;
+}
+.active {
+    background-color: white !important;
+    color: black !important;
+}
+.sstuff {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+.my-login {
+    float: right;
+    color: white;
+}

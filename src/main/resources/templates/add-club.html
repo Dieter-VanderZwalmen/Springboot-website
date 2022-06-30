@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title=#{title.club.add})"></head>
+<link rel="icon" href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+
+<body>
+<header th:replace="fragments/header :: header(current='addClub')"></header>
+
+<main class="container">
+
+        <h2 th:text="#{title.club.add}"></h2>
+        <form method="POST" action="/clubs/add" th:object="${club}">
+            <p class="mb-3">
+                <p th:if="${namenu != null}" class="text-danger" th:text="#{${namenu}}"></p>
+                <label for="name" class="col-form-label"><a th:text="#{Name}"></a></label>
+                <input type="text" th:field="*{name}" id="name" th:placeholder="#{Name}" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('name')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+            <p class="text-danger" th:if="${emainu != null}" th:text="#{${emainu}}"></p>
+                <label for="email" class="col-form-label"><a th:text="#{Email}"></a></label>
+                <input type="text" th:field="*{email}" id="email" th:placeholder="#{Email}" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('email')}" >
+                    <span th:text="#{${error}}" class="text-danger"></span>
+                    <br>
+
+                </span>
+            </p>
+            <p class="mb-3">
+                <label for="regio" class="col-form-label"><a th:text="#{Region}"></a></label>
+                <input type="text" th:field="*{regio}" id="regio" th:placeholder="#{Region}" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('regio')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p class="mb-3">
+                <label for="maxLeden" class="col-form-label"><a th:text="#{MaxMembers}"></a></label>
+                <input type="number"  th:field="*{maxLeden}" id="maxLeden" min="5" max="100" th:placeholder="#{MaxMembers}" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('maxLeden')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p>
+                <input  type="submit"  th:value="#{add.club}" class="btn btn-secondary">
+            </p>
+        </form>
+
+
+
+</main>
+    <footer th:replace="fragments/footer"></footer>
+
+</body>
+</html>

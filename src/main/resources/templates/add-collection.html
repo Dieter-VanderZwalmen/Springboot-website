@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head::head(title=#{title.coin.add})">
+
+</head>
+<link rel="icon" href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+<body>
+<header th:replace="fragments/header :: header(current='addMuntCollectie')"></header>
+<main>
+    <div class="container">
+        <h2 th:text="#{title.coin.add}"></h2>
+        <form method="post" action="/collections/add" th:object="${collection}">
+            <span th:each="error:${#fields.errors('titel')}" th:text="#{${error}}" class="text-danger"></span>
+            <span th:if="${titel != null}" th:text="#{${titel}}" class="text-danger"></span>
+            <p class="mb-3">
+                <label for="titel" class="col-form-label" th:text="#{titel.label}"></label>
+                <input type="text" th:field="*{titel}" id="titel" th:placeholder="#{titel.label}" class="form-control col-sm-5">
+
+            </p>
+
+
+            <p class="mb-3">
+                <p th:if="${jaartal != null}" th:text="#{${jaartal}}" class="text-danger"></p>
+                <label for="land" th:text="#{country}"></label>
+                <input type="text" th:field="*{land}" id="land" th:placeholder="#{country}" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('land')}" th:text="#{${error}}" class="text-danger"></span>
+
+            </p>
+            <p class="mb-3">
+                <label for="jaartal" th:text="#{years}"></label>
+                <input type="number" th:field="*{jaartal}" id="jaartal" th:placeholder="#{years}" min="0" max="2022" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('jaartal')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p><input type="submit" value="Add Munt Collection" class="btn btn-secondary"></p>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/footer"></footer>
+
+</body>
+</html>

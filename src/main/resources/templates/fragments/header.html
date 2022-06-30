@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="/docs/5.1/assets/js/docs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+</head>
+<link rel="icon" href="https://cdn3.vectorstock.com/i/thumb-large/51/07/british-money-gold-coin-one-shilling-vector-1985107.jpg">
+
+<body>
+<header class="py-3 mb-4 ">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-center">
+            <a style="font-size: 25px" class="d-flex align-items-center pb-4 mb-3 mb-lg-0 mr-auto text-dark text-decoration-none" href="/"  th:text="#{titel.label}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="dropdown">
+                <button th:text="#{drop.language}" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a class="dropdown-item" th:href="@{/(lang=en)}">English</a>
+                    <a class="dropdown-item" th:href="@{/(lang=nl)}">Nederlands</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark localnav">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li sec:authorize="hasAnyRole('USER', 'ADMIN')" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" th:text="#{titel.label}" id="navbarDropdownMunt" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            </a>
+                            <ul class="dropdown-menu localdropul" aria-labelledby="navbarDropdown">
+                                <li  ><a class="dropdown-item" th:classappend="${current == 'muntCollectieOverview' ? 'active' : ''}" href="/collections/overview" th:text="#{nav.overview.coin}"></a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:classappend="${current == 'addMuntCollectie' ? 'active' : ''}" href="/collections/add" th:text="#{nav.add.coin}"></a></li>
+                            </ul>
+                        </li>
+                        <li sec:authorize="hasAnyRole('USER', 'ADMIN')" class="nav-item dropdown">
+                            <a  class="nav-link dropdown-toggle text-white" href="#" th:text="#{clubs}" id="navbarDropdownClubs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            </a>
+                            <ul class="dropdown-menu localdropul" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:classappend="${current == 'overviewClub' ? 'active' : ''}" href="/clubs/overview" th:text="#{nav.overview.club}"></a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:classappend="${current == 'addClub' ? 'active' : ''}" href="/clubs/add" th:text="#{nav.add.club}"></a></li>
+                            </ul>
+
+                        </li>
+
+                        <!-- This is not needed for the assignment
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" th:text="#{Collectors}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            </a>
+                            <ul class="dropdown-menu localdropul" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" th:classappend="${current == 'overviewVerzamelaar' ? 'active' : ''}" href="/collectors/overview" th:text="#{nav.overview.collectors}"></a></li>
+                                <li><a class="dropdown-item" th:classappend="${current == 'addVerzamelaar' ? 'active' : ''}" href="/collectors/add" th:text="#{add.collector}"></a></li>
+                            </ul>
+                        </li>-->
+
+                    </ul>
+                    <a sec:authorize="!isAuthenticated()" class="btn my-login" type="submit" href="/login" th:text="#{login}"></a>
+                    <a sec:authorize="isAuthenticated()" class="btn my-login" type="submit" href="/logout" th:text="#{logout}"></a>
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="card bg-dark text-white">
+            <img style="opacity: 0.7" src="https://www.galloromeinsmuseum.be/uploads/images/Civitas/OoginOog/Eyetoeye/munten_1200x350.jpg" class="card-img" alt="banner">
+            <div class="card-img-overlay">
+            </div>
+        </div>
+
+    </div>
+
+</header>
+<script src="/docs/5.1/assets/js/docs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+
+</body>
+</html>

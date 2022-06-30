@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head th:replace="fragments/head::head(title=#{title.update.coin})">
+</head>
+<body>
+<header th:replace="fragments/header :: header(current='muntCollectieOverview')"></header>
+<main class="container">
+    <div class="container-lg">
+        <h2 th:text="#{title.coin.update}"></h2>
+
+        <form method="post" th:action="@{/collections/update/{id}(id=${collection.id})}" th:object="${collection}">
+            <span th:each="error:${#fields.errors('titel')}" th:text="#{${error}}" class="text-danger"></span>
+            <span th:if="${titel != null}" th:text="#{${titel}}" class="text-danger"></span>
+            <p class="mb-3">
+                <label for="titel" class="col-form-label" th:text="#{title}"></label>
+                <input type="text" th:field="*{titel}" id="titel" class="form-control col-sm-5">
+
+            </p>
+
+            </p>
+            <span th:if="${jaartal != null}" th:text="#{${jaartal}}" class="text-danger"></span>
+            <p class="mb-3">
+                <label for="land" th:text="#{country}" ></label>
+                <input type="text" th:field="*{land}" id="land" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('land')}" th:text="#{${error}}" class="text-danger"></span>
+
+            </p>
+            <p class="mb-3">
+                <label for="jaartal" th:text="#{years}"></label>
+                <input type="number" th:field="*{jaartal}" min="0" max="2022" id="jaartal" class="form-control col-sm-5">
+                <span th:each="error:${#fields.errors('jaartal')}" th:text="#{${error}}" class="text-danger"></span>
+            </p>
+            <p><input type="submit" value="Submit" class="btn btn-primary"></p>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

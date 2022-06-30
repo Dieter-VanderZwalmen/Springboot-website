@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title=#{title.coin.overview})">
+</head>
+<link rel="icon"
+      href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+<body>
+<header th:replace="fragments/header :: header(current='muntCollectieOverview')"></header>
+
+<main class="container">
+    <h2 th:text="#{search.field}"></h2>
+
+    <div th:if="${searchError}!=null" class="alert-danger">
+        <span th:text="#{${searchError}}"></span>
+    </div>
+
+    <form th:classappend="sform" method="GET"
+          th:action="@{/collections/search/page=1}">
+        <select class="form-select sstuff" th:name="way" id="way">
+
+            <option th:if="${preway == null}" hidden th:text="#{select.search.method}" selected></option>
+            <option th:unless="${preway == null}" hidden th:text="#{select.search.method}" ></option>
+
+            <option th:if="${preway == 'land'}" th:text="#{search.by.land}" th:value="land" selected></option>
+            <option th:unless="${preway == 'land'}" th:text="#{search.by.land}" th:value="land" ></option>
+
+            <option th:if="${preway == 'jaartal'}" th:text="#{search.by.jaartal}" th:value="jaartal" selected></option>
+            <option th:unless="${preway == 'jaartal'}" th:text="#{search.by.jaartal}" th:value="jaartal"></option>
+
+            <option th:if="${preway == 'jaartal-voor'}" th:text="#{search.all.before.jaartal}" th:value="jaartal-voor" selected></option>
+            <option th:unless="${preway == 'jaartal-voor'}" th:text="#{search.all.before.jaartal}" th:value="jaartal-voor"></option>
+
+        </select>
+        <div class="mb-3 sstuff">
+            <label th:for="search" class="form-label" th:text="#{search.field}"></label>
+            <input th:type="text" th:name="value" th:value="${prevalue}" class="form-control" th:id="search">
+        </div>
+
+        <button type="submit" class="btn btn-secondary mb-4" th:text="#{search.field}"></button>
+    </form>
+
+
+    </div>
+
+    <div th:switch="${collecties}">
+        <h2 th:if="${collecties == null or #lists.isEmpty(collecties)}" th:text="#{no.coin.collections}"></h2>
+        <h2 th:case="*" th:text="#{title.coin.overview}" th:if="${!#lists.isEmpty(collecties) and collecties != null}"></h2>
+        <h2 class="pt-4" th:case="null" th:text="#{no.coin.collections}"></h2>
+        <h2 class="pt-4" th:case="*" th:text="#{title.coin.overview}" th:if="${!#lists.isEmpty(collecties) and collecties != null}"></h2>
+        <span class="text-danger" th:if="${error != null}" th:text="#{${error}}"></span>
+        <table class="table table-striped" th:if="${!#lists.isEmpty(collecties) and collecties != null}">
+            <thead>
+            <tr>
+                <th th:text="#{title}"></th>
+
+                <!--dit zorgt ervoor dat je ook de optie hebt om desc te sorteren-->
+                <th th:if="${orderCountry == null || orderCountry=='ASC' }">
+                <a style="color: #A39470" href="/collections/overview/land/ASC/page=1" th:text="#{country}"></a>
+                </th>
+
+                <th th:if="${orderCountry=='DESC'}">
+                    <a style="color: #A39470" href="/collections/overview/land/DESC/page=1" th:text="#{country}"></a>
+                </th>
+
+                <th th:if="${orderYear == null || orderYear=='ASC'}">
+                <a style="color: #A39470" href="/collections/overview/jaartal/ASC/page=1" th:text="#{years}"></a>
+                </th>
+
+                <th th:if="${orderYear=='DESC'}">
+                    <a style="color: #A39470" href="/collections/overview/jaartal/DESC/page=1" th:text="#{years}"></a>
+                </th>
+
+                <th th:text="#{update}"></th>
+                <th th:text="#{delete}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coin:${collecties}">
+                <td class="pt-3" th:text="${coin.titel}"></td>
+                <td class="pt-3" th:text="${coin.land}"></td>
+                <td class="pt-3" th:text="${coin.jaartal}"></td>
+                <td><a th:href="@{/collections/update/{id}(id=${coin.id})}" class="btn btn-secondary rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg>
+                </a></td>
+                <td><a th:href="@{/collections/remove/{id}(id=${coin.id})}" class="btn btn-secondary rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                    </svg>
+                </a></td>
+
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" >
+                <li class="page-item" th:if="${currentPage > 1}">
+                    <a class="page-link"  th:href="'/collections/overview/page='+${currentPage - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == pnum ? 'active' : ''}" th:each="pnum:${pages}"><a class="page-link" th:href="'/collections/overview/page='+${pnum}" th:text="${pnum}"></a></li>                <li class="page-item" th:if="${currentPage < pages.size()}">
+                    <a class="page-link" th:href="'/collections/overview/page='+${currentPage + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+
+</main>
+
+<footer th:replace="fragments/footer"></footer>
+</body>
+
+</html>

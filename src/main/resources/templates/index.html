@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head th:replace="fragments/head::head(title=#{title.home})">
+
+</head>
+<link rel="icon" href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+<body>
+<header th:replace="fragments/header :: header(current='index')"></header>
+<main>
+    <div class="container">
+    <h2 class="container-lg" th:text="#{Welcome}"></h2>
+    <div th:if="${error}!=null" class="alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

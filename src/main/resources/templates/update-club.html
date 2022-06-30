@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='club.overview')"></head>
+
+
+<body>
+<header th:replace="fragments/header :: header(current='clubOverview')"></header>
+
+<main class="container">
+  <div class="container-lg">
+  <h2>Update club</h2>
+  <div th:if="${error}!=null" class="alert-danger">
+    <span th:text="${error}"></span>
+  </div>
+  <div th:if="${error}==null">
+    <form action="#" th:action="@{/clubs/update/{id}(id=${club.id})}" th:object="${club}" method="post">
+      <p class="mb-3">
+      <p th:if="${collectorError != null}" class="text-danger" th:text="#{${collectorError}}"></p>
+      <p th:if="${namenu != null}" class="text-danger" th:text="#{${namenu}}"></p>
+        <label for="name" class="form-label" th:text="#{Name}"></label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control col-sm-5">
+        <span th:each="err:${#fields.errors('name')}" th:text="#{${err}}" class="text-danger"></span>
+      </p>
+      <p class="mb-3">
+      <p class="text-danger" th:if="${emainu != null}" th:text="#{${emainu}}"></p>
+        <label for="email" class="form-label" th:text="#{Email}"></label>
+        <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control col-sm-5">
+        <span th:each="err:${#fields.errors('email')}" th:text="#{${err}}" class="text-danger"></span>
+      </p>
+      <p class="mb-3">
+        <label for="regio" class="form-label" th:text="#{Region}"></label>
+        <input type="text" th:field="*{regio}" id="regio" placeholder="Regio" class="form-control col-sm-5">
+        <span th:each="err:${#fields.errors('regio')}" th:text="#{${err}}" class="text-danger"></span>
+      </p>
+      <p class="mb-3">
+        <label for="maxLeden" class="col-form-label" th:text="#{MaxMembers}"></label>
+        <input type="text" th:field="*{maxLeden}" id="maxLeden" placeholder="MaxLeden" class="form-control col-sm-5">
+        <span th:each="error:${#fields.errors('maxLeden')}" th:text="#{${error}}" class="text-danger"></span>
+      </p>
+      <p>
+        <input type="submit" value="Update club" class="btn btn-primary">
+      </p>
+    </form>
+  </div>
+  </div>
+
+</main>
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

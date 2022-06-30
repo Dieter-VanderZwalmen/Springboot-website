@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title=#{title.coin.overview})">
+</head>
+<link rel="icon"
+      href="https://purepng.com/public/uploads/large/purepng.com-dollar-coinobjectsdollar-coinmoneycashdollarcoinobjectgoldcurrencyusacentmoneycashdollarcoinobjectgoldcurrencyusacent-631522323253awxb9.png">
+
+
+<body>
+
+<header th:replace="fragments/header :: header(current='muntCollectieOverview')"></header>
+<main class="container">
+    <h2 th:text="#{remove.collection}"></h2>
+    <div th:if="${error}!=null" class="alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+    <div th:if="${error}==null">
+        <form th:action="@{/collections/remove/{id}(id=${collection.id})}" th:object="${collection}" method="post">
+            <p th:text="#{are.you.sure}"></p>
+            <ul class="list-group">
+                <li class="list-group-item" th:text="${collection.titel}"></li>
+                <li class="list-group-item" th:text="${collection.land}"></li>
+                <li class="list-group-item" th:text="${collection.jaartal}"></li>
+
+            </ul>
+            <input type="submit" value="Remove collection" class="btn btn-danger" style="margin-top: 10px">
+            <a href="/collections/overview" th:text="#{back}" class="btn btn-primary" style="margin-top: 10px"></a>
+        </form>
+    </div>
+</main>
+<footer th:replace="fragments/footer"></footer>
+
+</body>
+</html>
